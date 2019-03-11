@@ -1,0 +1,14 @@
+{{- $name := include "aw-basket.fullname" . -}}
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "cfg-{{ $name }}"
+  labels:
+    app: {{ template "aw-basket.name" . }}
+    chart: {{ template "aw-basket.chart" .}}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  constr: {{ .Values.basket.constr }}

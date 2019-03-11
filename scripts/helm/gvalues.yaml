@@ -1,0 +1,17 @@
+basket:
+  constr:  mongodb://mongo
+order:
+  constr: Server=sql;Database=beerbook-order;User Id=sa;Password=Pass@word1
+catalog:
+  constr: Server=sql;Database=beerbook-basket;User Id=sa;Password=Pass@word1
+
+imagePullSecrets:
+  - name: acr-key
+
+ingress:
+  tls:
+    - secretName: cert-letsencrypt-staging
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"

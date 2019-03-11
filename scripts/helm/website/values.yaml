@@ -1,0 +1,29 @@
+replicaCount: 1
+applicationName: aksworkshop
+
+image:
+  repository: order
+  tag: latest
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  configmap:
+    - name: urls__basket
+    - name: urls__catalog
+    - name: urls__order
+  values: {}
