@@ -33,6 +33,7 @@ metadata:
     component: website
   name: website
 spec:
+  type: LoadBalancer
   ports:
   - port: 80
     name: http
