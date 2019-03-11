@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  sql:
+    image: microsoft/mssql-server-linux:2017-latest
+
+  mongo:
+    image: mongo:3.4-jessie
+
+  website:
+    image: ${REGISTRY:-beerbook}/website:${TAG:-latest}
+
+  basket:
+    image: ${REGISTRY:-beerbook}/basket:${TAG:-latest}
+
+  catalog:
+    image: ${REGISTRY:-beerbook}/catalog:${TAG:-latest}
+
+  order:
+    image: ${REGISTRY:-beerbook}/order:${TAG:-latest}

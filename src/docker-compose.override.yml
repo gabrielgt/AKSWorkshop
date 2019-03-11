@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  sql:
+
+  mongo:
+
+  website:
+
+  basket:
+
+  catalog:
+
+  order:

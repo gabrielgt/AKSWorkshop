@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerBook.Shared", "BeerBook
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeerBook.Models", "BeerBook.Models\BeerBook.Models.csproj", "{38792A9B-E8EF-4731-BBA5-C8D8741A06FF}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7023C3EF-1FA6-41D5-B338-8401BD61A979}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{38792A9B-E8EF-4731-BBA5-C8D8741A06FF}.Release|x64.Build.0 = Release|Any CPU
 		{38792A9B-E8EF-4731-BBA5-C8D8741A06FF}.Release|x86.ActiveCfg = Release|Any CPU
 		{38792A9B-E8EF-4731-BBA5-C8D8741A06FF}.Release|x86.Build.0 = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|x64.Build.0 = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Debug|x86.Build.0 = Debug|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|x64.ActiveCfg = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|x64.Build.0 = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|x86.ActiveCfg = Release|Any CPU
+		{7023C3EF-1FA6-41D5-B338-8401BD61A979}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
