@@ -9,12 +9,32 @@ services:
 
   website:
     image: ${REGISTRY:-beerbook}/website:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: BeerBook.Web/Dockerfile    
+    depends_on:
+      - sql
 
   basket:
     image: ${REGISTRY:-beerbook}/basket:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: BeerBook.Basket/Dockerfile    
+    depends_on:
+      - mongo
 
   catalog:
     image: ${REGISTRY:-beerbook}/catalog:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: BeerBook.Catalog/Dockerfile
+    depends_on:
+      - sql
 
   order:
     image: ${REGISTRY:-beerbook}/order:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: BeerBook.Order/Dockerfile    
+    depends_on:
+      - sql
