@@ -1,0 +1,20 @@
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aksworkshop
+  labels:
+    app: aksworksop
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+    ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: my.host.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: website
+              servicePort: http
