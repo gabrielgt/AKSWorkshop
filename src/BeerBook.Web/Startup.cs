@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeerBook.Shared;
 using BeerBook.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,9 @@ namespace BeerBook.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseConfiguratedPathBase(Configuration);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

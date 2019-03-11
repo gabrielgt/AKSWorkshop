@@ -9,7 +9,6 @@ services:
       - "5433:1433" 
 
   mongo:
-    image: mongo:3.4-jessie
     ports:
       - "27017:27017"
 

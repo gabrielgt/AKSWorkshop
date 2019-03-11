@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BeerBook.Models\BeerBook.Models.csproj" />
+    <ProjectReference Include="..\BeerBook.Shared\BeerBook.Shared.csproj" />
   </ItemGroup>
 
 </Project>

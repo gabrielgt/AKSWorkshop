@@ -14,7 +14,6 @@ namespace BeerBook.Order.Controllers
         public IActionResult Index()
         {
             return new RedirectResult("~/swagger");
-
         }
     }
 }
