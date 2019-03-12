@@ -5,8 +5,7 @@ order:
 catalog:
   constr: Server=sql;Database=beerbook-basket;User Id=sa;Password=Pass@word1
 
-imagePullSecrets:
-  - name: acr-key
+acrAccount: acrsa
 
 ingress:
   tls:
@@ -15,3 +14,9 @@ ingress:
     kubernetes.io/ingress.class: addon-http-application-routing
     ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+keyVault:
+  Name: testedukeyvault
+  resourceGroup: test-rg-edu
+  tenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47
+  azureSubsId: e3035ac1-c06c-4daf-8939-57b3c5f1f759

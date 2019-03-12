@@ -1,5 +1,6 @@
 {{- $name := include "aw-website.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
+{{- $scrname := printf "%s-%s" "scr" $name -}}
 
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -22,6 +23,7 @@ spec:
         app: {{ template "aw-website.name" . }}
         release: {{ .Release.Name }}
     spec:
+      serviceAccountName: {{ .Values.acrAccount }}
       {{ if .Values.imagePullSecrets -}}
       imagePullSecrets:
       {{ range .Values.imagePullSecrets -}}
@@ -47,7 +49,16 @@ spec:
                   name: {{ $cfgname }}
                   key: {{ .name }}
           {{- end -}}
-          {{- end }}
+          {{- end -}}
+          {{- if .Values.env.secretmap -}}
+          {{- range .Values.env.secretmap }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $scrname }}
+                  key: {{ .name }}
+          {{- end -}}
+          {{- end }}                 
           ports:
             - name: http
               containerPort: 80

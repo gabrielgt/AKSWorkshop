@@ -1,5 +1,6 @@
 {{- $name := include "aw-catalog.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
+{{- $scrname := printf "%s-%s" "scr" $name -}}
 
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -22,16 +23,38 @@ spec:
         app: {{ template "aw-catalog.name" . }}
         release: {{ .Release.Name }}
     spec:
+      serviceAccountName: {{ .Values.acrAccount }}
       {{ if .Values.imagePullSecrets -}}
       imagePullSecrets:
       {{ range .Values.imagePullSecrets -}}
         - name: {{ .name }}
       {{- end -}}
       {{- end }}
+      {{- if .Values.keyVault -}}
+      volumes:
+      - name: my-kv
+        flexVolume:
+          driver: "azure/kv"
+          secretRef:
+            name: keyvaultreader               
+          options:
+            keyvaultname: {{ .Values.keyVault.Name }}
+            keyvaultobjectnames: {{ .Values.keyVault.secrets }}
+            keyvaultobjecttypes: {{ .Values.keyVault.secretsTypes }}
+            resourcegroup: {{ .Values.keyVault.resourceGroup }}
+            subscriptionid: {{ .Values.keyVault.azureSubsId }}
+            tenantid: {{ .Values.keyVault.tenantId }}
+      {{- end }}      
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ if .Values.keyVault -}}
+          volumeMounts:
+          - name: my-kv
+            mountPath: /kv-data
+            readOnly: true          
+          {{- end }}      
           env:
           {{- if .Values.env.values -}}
           {{- range .Values.env.values }}
@@ -47,7 +70,16 @@ spec:
                   name: {{ $cfgname }}
                   key: {{ .name }}
           {{- end -}}
-          {{- end }}
+          {{- end -}}
+          {{- if .Values.env.secretmap -}}
+          {{- range .Values.env.secretmap }}
+            - name: {{ .name }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $scrname }}
+                  key: {{ .name }}
+          {{- end -}}
+          {{- end }}                 
           ports:
             - name: http
               containerPort: 80

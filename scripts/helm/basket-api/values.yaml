@@ -22,8 +22,10 @@ tolerations: []
 affinity: {}
 
 env:
-  configmap:
-    - name: constr
   values:
     - name: PATH_BASE
       value: /basket-api
+
+keyVault:
+  secrets: basketconstr
+  secretsTypes: secret
