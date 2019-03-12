@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using BeerBook.Shared;
+using BeerBook.Shared.Configuration;
 
 namespace BeerBook.Catalog
 {
@@ -27,6 +28,7 @@ namespace BeerBook.Catalog
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(cb => cb.AddFolder("/kv-data", "catalog"))
                 .UseStartup<Startup>();
     }
 }
