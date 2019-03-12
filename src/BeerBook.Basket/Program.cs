@@ -7,7 +7,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using BeerBook.Shared.Configuration;
 
 namespace BeerBook.Basket
 {
@@ -20,7 +19,6 @@ namespace BeerBook.Basket
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(cb => cb.AddFolder("/kv-data", "basket"))
                 .UseStartup<Startup>();
     }
 }
