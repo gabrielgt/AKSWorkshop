@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeerBook.Catalog.Extensions;
 using BeerBook.Shared;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
@@ -29,6 +32,7 @@ namespace BeerBook.Catalog
         {
             services
                 .AddDatabase(Configuration)
+                .AddHealthChecks(Configuration)
                 .AddSwaggerGen(options =>
                 {
                     options.DescribeAllEnumsAsStrings();
@@ -51,6 +55,7 @@ namespace BeerBook.Catalog
             }
 
             app.UseConfiguratedPathBase(Configuration, loggerFactory);
+            app.UseCustomHealthChecks();
 
             app.UseSwagger()
                 .UseSwaggerUI(c =>
@@ -60,6 +65,36 @@ namespace BeerBook.Catalog
                 });
 
             app.UseMvc();
+        }
+    }
+
+    static class ServiceCollectionExtensions
+    {
+        public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            var hcBuilder = services.AddHealthChecks();
+            hcBuilder.AddCheck("self", () => HealthCheckResult.Healthy());
+            hcBuilder
+                .AddSqlServer(
+                    configuration["constr"],
+                    name: "CatalogDb-check",
+                    tags: new string[] { "catalogdb" });
+            return services;
+        }
+
+        public static void UseCustomHealthChecks(this IApplicationBuilder app)
+        {
+
+            app.UseHealthChecks("/hc", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+
+            app.UseHealthChecks("/liveness", new HealthCheckOptions
+            {
+                Predicate = r => r.Name.Contains("self")
+            });
         }
     }
 }
