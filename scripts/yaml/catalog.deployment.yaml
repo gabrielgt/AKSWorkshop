@@ -15,7 +15,10 @@ spec:
         imagePullPolicy: Always
         env:
         - name: constr
-          value: Server=sql;Database=beerbook-basket;User Id=sa;Password=Pass@word1
+          valueFrom:
+              configMapKeyRef:
+                key: constr
+                name: cm-catalog
         - name: PATH_BASE
           value: /catalog-api
         ports:
