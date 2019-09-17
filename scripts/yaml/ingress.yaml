@@ -13,3 +13,9 @@ spec:
           serviceName: website
           servicePort: http
         path: /
+  tls:
+    - hosts:
+      - e459a3cd7007403ea9a5.northeurope.aksapp.io
+      secretName: gabriel-crt-secret
+
+
