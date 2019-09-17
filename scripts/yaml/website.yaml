@@ -6,12 +6,12 @@ spec:
   template:
     metadata:
       labels:
-        app: aksworksop
+        app: aksworkshop
         component: website
     spec:
       containers:
       - name: website
-        image: testeduacr.azurecr.io/website
+        image: gabrielgt.azurecr.io/website
         imagePullPolicy: Always
         env:
         - name: urls__basket
@@ -23,19 +23,20 @@ spec:
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: acr-key
+      - name: acr-gabriel-key
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: aksworksop
+    app: aksworkshop
     component: website
   name: website
 spec:
+  type: LoadBalancer
   ports:
   - port: 80
     name: http
   selector:
-    app: aksworksop
+    app: aksworkshop
     component: website

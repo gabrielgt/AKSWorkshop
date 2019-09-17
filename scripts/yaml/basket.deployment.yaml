@@ -6,12 +6,12 @@ spec:
   template:
     metadata:
       labels:
-        app: aksworksop
+        app: aksworkshop
         component: basket
     spec:
       containers:
       - name: basket
-        image: testeduacr.azurecr.io/basket
+        image: gabrielgt.azurecr.io/basket
         imagePullPolicy: Always
         env:
         - name: constr
@@ -21,4 +21,4 @@ spec:
         ports:
         - containerPort: 80
       imagePullSecrets:
-      - name: acr-key
+      - name: acr-gabriel-key

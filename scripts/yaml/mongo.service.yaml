@@ -1,2 +1,14 @@
 apiVersion: v1
 kind: Service
+metadata:
+  labels:
+    app: aksworkshop
+    component: mongo
+  name: mongo
+spec:
+  ports:
+  - port: 27017
+    name: mongo
+  selector:
+    app: aksworkshop
+    component: mongo
