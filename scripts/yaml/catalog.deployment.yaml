@@ -23,5 +23,20 @@ spec:
           value: /catalog-api
         ports:
         - containerPort: 80
+        livenessProbe:
+            httpGet:
+              path: /liveness
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 2
+            successThreshold: 1
+            initialDelaySeconds: 5
+        readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 60
+            successThreshold: 2
       imagePullSecrets:
       - name: acr-gabriel-key
