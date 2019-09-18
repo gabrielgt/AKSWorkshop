@@ -39,3 +39,7 @@ spec:
               memory: 2Gi
       imagePullSecrets:
       - name: acr-gabriel-key
+      tolerations:
+        - key: gpu
+          value: none
+          effect: NoExecute
