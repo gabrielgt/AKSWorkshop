@@ -15,11 +15,16 @@ spec:
         imagePullPolicy: Always
         env:
         - name: constr
-          value: mongodb://mongo
+          value: mongodb://10.240.0.67
         - name: PATH_BASE
           value: /basket-api
         ports:
         - containerPort: 80
+        resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 100m
       imagePullSecrets:
       - name: acr-gabriel-key
       tolerations:
