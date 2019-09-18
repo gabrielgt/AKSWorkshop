@@ -43,3 +43,5 @@ spec:
         - key: gpu
           value: none
           effect: NoExecute
+      nodeSelector:
+        kubernetes.io/os: linux
