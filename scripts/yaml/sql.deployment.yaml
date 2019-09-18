@@ -20,3 +20,11 @@ spec:
           value: "Y"
         ports:
         - containerPort: 1433
+        volumeMounts:
+          - mountPath: "/var/opt/mssql"
+            name: volume
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: azure-managed-disk
+
