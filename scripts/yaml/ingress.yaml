@@ -13,6 +13,10 @@ spec:
           serviceName: website
           servicePort: http
         path: /
+      - backend:
+          serviceName: basket
+          servicePort: http
+        path: /basket-api
   tls:
     - hosts:
       - e459a3cd7007403ea9a5.northeurope.aksapp.io

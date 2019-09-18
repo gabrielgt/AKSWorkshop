@@ -27,10 +27,10 @@ spec:
               cpu: 100m
       imagePullSecrets:
       - name: acr-gabriel-key
-      tolerations:
-        - key: virtual-kubelet.io/provider
-          value: azure
-          effect: NoSchedule
-      nodeSelector:
-        type: virtual-kubelet
+      # tolerations:
+      #   - key: virtual-kubelet.io/provider
+      #     value: azure
+      #     effect: NoSchedule
+      # nodeSelector:
+      #   type: virtual-kubelet
 
