@@ -22,3 +22,10 @@ spec:
         - containerPort: 80
       imagePullSecrets:
       - name: acr-gabriel-key
+      tolerations:
+        - key: virtual-kubelet.io/provider
+          value: azure
+          effect: NoSchedule
+      nodeSelector:
+        type: virtual-kubelet
+
