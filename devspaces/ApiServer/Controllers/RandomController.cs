@@ -14,11 +14,11 @@ namespace ApiServer.Controllers
         [HttpGet("value")]
         public ActionResult<int> Get()
         {
-            /*
+            
              // CODIGO ORIGINAL DE LA API ERRONEA
              return 42;
-            */
-            return new Random().Next(1,101) * 100;
+            
+            // return new Random().Next(1,101) * 100;
         }
     }
 }
